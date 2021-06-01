@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React06-AjaxCalls</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__left">
+    <div class="stackedit__toc">
+      
+<ul>
+<li><a href="#react06-ajax-calls">REACT06: AJAX CALLS</a>
+<ul>
+<li><a href="#goals">GOALS</a></li>
+<li><a href="#steps">STEPS</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+  </div>
+  <div class="stackedit__right">
+    <div class="stackedit__html">
+      <h1 id="react06-ajax-calls">REACT06: AJAX CALLS</h1>
+<h2 id="goals">GOALS</h2>
+<ul>
+<li>Component Lifecycle events</li>
+<li>Connect to Remote Api</li>
+<li>Use fecth api and promises</li>
+<li>Use async/await</li>
+</ul>
+<h2 id="steps">STEPS</h2>
+<p>Starter: review lifecycle methods<br>
+Step1: Call to service with mock data<br>
+Step2: Review CORS and Async/Await<br>
+Final: Call to remote service (Mockoon Server)</p>
+<h3 id="starter">Starter:</h3>
+<p>Files:</p>
+<ul>
+<li>./src/EuroConverter.js</li>
+<li>./src/remote/CurrencyService.js</li>
+</ul>
+<p>Review:</p>
+<ul>
+<li>Events,</li>
+<li>State,</li>
+<li>Lifecycle Events</li>
+<li>handlers</li>
+</ul>
+<h3 id="step1-call-to-service-with-mock-data">Step1: Call to service with mock data</h3>
+<h4 id="srcremotecurrencyservice.js">./src/remote/CurrencyService.js</h4>
+<p>Review CurrencyService …</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">export</span>  <span class="token keyword">function</span> <span class="token function">currencyRate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token comment">//1) Mock version</span>
+	<span class="token keyword">return</span> <span class="token punctuation">{</span>
+		<span class="token string">"USD"</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">,</span>
+		<span class="token string">"EUR"</span><span class="token punctuation">:</span><span class="token number">0.8231787</span><span class="token punctuation">,</span>
+		<span class="token string">"GBP"</span><span class="token punctuation">:</span><span class="token number">0.70858018</span><span class="token punctuation">,</span>
+		<span class="token string">"JPY"</span><span class="token punctuation">:</span><span class="token number">108.85982</span><span class="token punctuation">,</span>
+		<span class="token string">"CNY"</span><span class="token punctuation">:</span><span class="token number">6.4249112</span><span class="token punctuation">,</span>
+		<span class="token string">"RUB"</span><span class="token punctuation">:</span><span class="token number">74.117424</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h4 id="srceuroconverter.js">./src/EuroConverter.js</h4>
+<p>import function loading data from server (currently mocked)</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">import</span> <span class="token punctuation">{</span>currencyRate<span class="token punctuation">}</span> <span class="token keyword">from</span>  <span class="token string">'./remote/CurrencyService.js'</span>
+</code></pre>
+<p>Let’s call this function when componentMount</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token function">componentDidMount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"componentDidMount"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">let</span> currentUsd2CurrencyChanges<span class="token operator">=</span><span class="token function">currencyRate</span><span class="token punctuation">(</span><span class="token string">'mockUrl'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">let</span> newState<span class="token operator">=</span><span class="token punctuation">{</span><span class="token operator">...</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">,</span><span class="token string">"usd2Eur"</span><span class="token punctuation">:</span>currentUsd2CurrencyChanges<span class="token punctuation">.</span>EUR<span class="token punctuation">}</span><span class="token punctuation">;</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span>newState<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="final-call-to-remote-service">Final: Call to remote service</h3>
+<p>Mock Server with mockoon</p>
+<pre class=" language-javascript"><code class="prism  language-javascript">Env<span class="token punctuation">:</span> mockCurrencies
+App<span class="token punctuation">:</span> currencies
+Api<span class="token punctuation">:</span> Get <span class="token operator">/</span>exchange
+response Body<span class="token punctuation">:</span>
+	<span class="token punctuation">{</span>
+	  <span class="token string">"USD"</span><span class="token punctuation">:</span><span class="token number">1</span><span class="token punctuation">,</span>
+	  <span class="token string">"EUR"</span><span class="token punctuation">:</span><span class="token number">0.8231787</span><span class="token punctuation">,</span>
+	  <span class="token string">"GBP"</span><span class="token punctuation">:</span><span class="token number">0.70858018</span><span class="token punctuation">,</span>
+	  <span class="token string">"JPY"</span><span class="token punctuation">:</span><span class="token number">108.85982</span><span class="token punctuation">,</span>
+	  <span class="token string">"CNY"</span><span class="token punctuation">:</span><span class="token number">6.4249112</span><span class="token punctuation">,</span>
+	  <span class="token string">"RUB"</span><span class="token punctuation">:</span><span class="token number">74.117424</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h4 id="srcremotecurrencyservice.js-1">./src/remote/CurrencyService.js</h4>
+<p>Let’s replace mock data with a real call to http server.</p>
+<p>Let’s use fetch api (final version)</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">export</span> <span class="token keyword">function</span> <span class="token function">currencyRate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+<span class="token keyword">let</span> responseData <span class="token operator">=</span> <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token string">'http://localhost:7003/currencies/exchange'</span><span class="token punctuation">,</span><span class="token punctuation">{</span>
+	method<span class="token punctuation">:</span> <span class="token string">"GET"</span><span class="token punctuation">,</span>
+	headers<span class="token punctuation">:</span> <span class="token punctuation">{</span><span class="token string">"Content-type"</span><span class="token punctuation">:</span> <span class="token string">"application/json"</span><span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>response <span class="token operator">=&gt;</span> response<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">then</span><span class="token punctuation">(</span>data <span class="token operator">=&gt;</span><span class="token punctuation">{</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> data<span class="token punctuation">;</span>
+<span class="token punctuation">}</span> <span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token keyword">catch</span><span class="token punctuation">(</span>error <span class="token operator">=&gt;</span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>error<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">return</span> responseData<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h4 id="srceuroconverter.js-1">./src/EuroConverter.js</h4>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">async</span> <span class="token function">componentDidMount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"componentDidMount"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">let</span> currentUsd2CurrencyChanges<span class="token operator">=</span> <span class="token keyword">await</span> <span class="token function">currencyRate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"received : "</span><span class="token punctuation">,</span>currentUsd2CurrencyChanges<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	
+	<span class="token keyword">if</span><span class="token punctuation">(</span>currentUsd2CurrencyChanges<span class="token punctuation">.</span>error<span class="token punctuation">)</span><span class="token punctuation">{</span>
+		<span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'Could not connect to Server. Please try again later'</span><span class="token punctuation">)</span>
+	<span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+		<span class="token keyword">let</span> newState<span class="token operator">=</span><span class="token punctuation">{</span><span class="token operator">...</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">,</span><span class="token string">"usd2Eur"</span><span class="token punctuation">:</span>currentUsd2CurrencyChanges<span class="token punctuation">.</span>EUR<span class="token punctuation">}</span><span class="token punctuation">;</span>
+		<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span>newState<span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="reviews">Reviews:</h3>
+<ul>
+<li>Fetch and CORS issue</li>
+<li>Async/await to prevent consuming data from function too early</li>
+</ul>
+
+    </div>
+  </div>
+</body>
+
+</html>

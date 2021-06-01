@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React03-UITemplate-toReact</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__left">
+    <div class="stackedit__toc">
+      
+<ul>
+<li><a href="#react-setup-ui-template">REACT: Setup UI Template</a>
+<ul>
+<li><a href="#goal">GOAL</a></li>
+<li><a href="#steps">STEPS</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+  </div>
+  <div class="stackedit__right">
+    <div class="stackedit__html">
+      <h1 id="react-setup-ui-template">REACT: Setup UI Template</h1>
+<h2 id="goal">GOAL</h2>
+<p>We want to access a page from our CSS template as React component.</p>
+<ul>
+<li>Page should be accessible from server at localhost:3000</li>
+<li>Page contents should be returned from a React component’s function</li>
+</ul>
+<h2 id="steps">STEPS</h2>
+<p><strong>STEP 1: Deploy template file on Server</strong></p>
+<ul>
+<li>Step 1.1: Copy demo files (html and assets) in /public</li>
+<li>Step 1.2: Access them from server</li>
+</ul>
+<hr>
+<p><strong>STEP 2 Create a new React component: (MasterPage.jsx)</strong></p>
+<ul>
+<li>Step 2.1: Create a new React Component called MasterPage with some default text</li>
+<li>Step 2.2: Import MasterPage into App.js</li>
+<li>Step 2.3:  Check in browser that text from MasterPage is displayed</li>
+</ul>
+<p><strong>The updated flow</strong><br>
+New flow should be as following:</p>
+<p><a href="https://mermaid-js.github.io/mermaid-live-editor/#/edit/eyJjb2RlIjoiZ3JhcGggVERcbiAgICBBW3B1YmxpYy9pbmRleC5odG1sXSAtLT4gQltzcmMvaW5kZXguanNdXG4gICAgQiAtLT4gQ1tzcmMvQXBwLmpzXVxuICAgIEMgLS0-IERbc3JjL01hc3RlclBhZ2UuanN4XSIsIm1lcm1haWQiOnt9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ"><img src="https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggVERcbiAgICBBW3B1YmxpYy9pbmRleC5odG1sXSAtLT4gQltzcmMvaW5kZXguanNdXG4gICAgQiAtLT4gQ1tzcmMvQXBwLmpzXVxuICAgIEMgLS0-IERbc3JjL01hc3RlclBhZ2UuanN4XSIsIm1lcm1haWQiOnt9LCJ1cGRhdGVFZGl0b3IiOmZhbHNlfQ" alt=""></a></p>
+<hr>
+<p><strong>STEP 3 Move contents from Css template page into React component: (MasterPage.jsx)</strong></p>
+<ul>
+<li>Step 3.1: Copy header contents from template to /public/index.html</li>
+<li>Step 3.2 Identify html element with contents from template page</li>
+<li>Step 3.3 Copy html fragment into React component</li>
+<li>Step 3.4 : Fix errors HTML to XHTML</li>
+<li>Step 3.5 : Fix errors XHTML to JSX</li>
+</ul>
+<p><strong>Try it out: Break MasterPage into Layout Components : (MasterPage.jsx)</strong></p>
+<ul>
+<li>
+<p>Step 4.1 Identify html element for navigation bar</p>
+</li>
+<li>
+<p>Step 4.2 Identify html element for menu side bar</p>
+</li>
+<li>
+<p>Step 4.3 Identify html element for content</p>
+</li>
+<li>
+<p>Step 4.4 Copy fragments into React component’s function<br>
+(NavigationBar, SideMenu, DefaultPage)</p>
+</li>
+<li>
+<p>Step 4.5 Import components into MasterPage and compose layout</p>
+</li>
+</ul>
+<hr>
+<h3 id="step-1-deploy-template-file-on-server">STEP 1: Deploy template file on Server</h3>
+<ul>
+<li>Step 1.1: Copy demo files (html and assets) in /public</li>
+</ul>
+<p>New /public folder will look like this:<br>
+<img src="https://github.com/stefanofiorenza/ReactCourse/raw/master/Resources/A01/DemoFilesInPublicFolder.png" alt="public folder" title="/public folder"></p>
+<ul>
+<li>Step 1.2: Access them from server</li>
+</ul>
+<p>Run Server</p>
+<pre class=" language-code"><code class="prism  language-code">&gt; npm start
+</code></pre>
+<p>Check in Browser</p>
+<pre class=" language-code"><code class="prism  language-code">localhost:3000/dashboard.html
+</code></pre>
+<h3 id="step-2-create-a-new-react-component-masterpage.jsx">STEP 2 Create a new React component: (MasterPage.jsx)**</h3>
+<ul>
+<li>Step 2.1: Create a new React Component called MasterPage with some default text</li>
+</ul>
+<pre class=" language-js"><code class="prism  language-js"><span class="token keyword">function</span> <span class="token function">MasterPage</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> <span class="token punctuation">(</span>
+		<span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+		MasterPage
+		<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+	<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">export</span>  <span class="token keyword">default</span> MasterPage<span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>Step 2.2: Import MasterPage into App.js</li>
+</ul>
+<pre class=" language-js"><code class="prism  language-js"><span class="token keyword">import</span>  <span class="token string">'./App.css'</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> MasterPage <span class="token keyword">from</span>  <span class="token string">'./MasterPage.jsx'</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">return</span> <span class="token punctuation">(</span>
+	<span class="token operator">&lt;</span>div  className<span class="token operator">=</span><span class="token string">"App"</span><span class="token operator">&gt;</span>
+		<span class="token operator">&lt;</span>MasterPage  <span class="token operator">/</span><span class="token operator">&gt;</span>
+	<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+	<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">export</span>  <span class="token keyword">default</span> App<span class="token punctuation">;</span>
+</code></pre>
+<ul>
+<li>Step 2.3:  Check in browser that text from MasterPage is displayed</li>
+</ul>
+<p>Run Server</p>
+<pre class=" language-code"><code class="prism  language-code">&gt; npm start
+</code></pre>
+<p>Check in Browser</p>
+<pre class=" language-code"><code class="prism  language-code">localhost:3000
+</code></pre>
+<p>If we can see MasterPage content from localhost:3000 it’s time to change the MasterPage function to return contents form the UI Template.</p>
+<h3 id="step-3-change-masterpage-to-return-ui-template-contents">STEP 3 Change MasterPage to return UI template contents</h3>
+<p><strong>- Step 3.1: Copy header contents from template to /public/index.html</strong></p>
+<pre class=" language-html"><code class="prism  language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span>  <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>utf-8<span class="token punctuation">"</span></span>  <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span>  <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>icon<span class="token punctuation">"</span></span>  <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>%PUBLIC_URL%/favicon.ico<span class="token punctuation">"</span></span>  <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span>  <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>viewport<span class="token punctuation">"</span></span>  <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>width=device-width, initial-scale=1<span class="token punctuation">"</span></span>  <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span>  <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>theme-color<span class="token punctuation">"</span></span>  <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>#000000<span class="token punctuation">"</span></span>  <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span>  <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>manifest<span class="token punctuation">"</span></span>  <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>%PUBLIC_URL%/manifest.json<span class="token punctuation">"</span></span>  <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span>  <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>utf-8<span class="token punctuation">"</span></span>  <span class="token punctuation">/&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>
+Black Dashboard by Creative Tim
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token comment">&lt;!-- Fonts and icons --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span>  <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800<span class="token punctuation">"</span></span>  <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span>  <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span>  <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://use.fontawesome.com/releases/v5.0.6/css/all.css<span class="token punctuation">"</span></span>  <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+
+<span class="token comment">&lt;!-- Nucleo Icons --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span>  <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>assets/css/nucleo-icons.css<span class="token punctuation">"</span></span>  <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span>  <span class="token punctuation">/&gt;</span></span>
+<span class="token comment">&lt;!-- CSS Files --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>link</span>  <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>assets/css/black-dashboard.css?v=1.0.0<span class="token punctuation">"</span></span>  <span class="token attr-name">rel</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>stylesheet<span class="token punctuation">"</span></span>  <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+</code></pre>
+<p><strong>- Step 3.2 Identify html element with contents from template page</strong></p>
+<h3 id="publicdashboard.html">/public/dashboard.html</h3>
+<p>Identify in body main div:</p>
+<pre class=" language-html"><code class="prism  language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>wrapper<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span> ...
+</code></pre>
+<p><strong>- Step 3.3 Copy html fragment into React component</strong></p>
+<h3 id="srcmasterpage.jsx">/src/MasterPage.jsx</h3>
+<p>Copy div wrapper element with all its content into MasterPage.jsx function</p>
+<pre class=" language-html"><code class="prism  language-html">function MasterPage() {
+return (
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span>  <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>wrapper<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span> ...
+	... content of wrapper to fix
+	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+	)
+}
+</code></pre>
+<p><strong>- Step 3.4 : Fix errors HTML to XHTML</strong></p>
+<p><strong>HTML Comments</strong><br>
+Check for</p>
+<ul>
+<li>html comments</li>
+</ul>
+<pre class=" language-html"><code class="prism  language-html"><span class="token comment">&lt;!-- .. --&gt;</span>
+</code></pre>
+<p>If you want to keep them at all, should be changed with</p>
+<pre class=" language-html"><code class="prism  language-html">{/* .. */}
+</code></pre>
+<p><strong>HTML unclosed tag</strong></p>
+<ul>
+<li>input</li>
+<li>br</li>
+<li>hr</li>
+<li>img</li>
+</ul>
+<p>Should be replaced by XHTML compliant tags:</p>
+<pre class=" language-html"><code class="prism  language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">..</span> <span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>hr</span><span class="token punctuation">/&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>img</span> <span class="token attr-name">..</span> <span class="token punctuation">/&gt;</span></span>
+</code></pre>
+<p><strong>- Step 3.5 : Fix errors XHTML to JSX</strong><br>
+Check complaints in browser CTRL+I</p>
+<p><strong>Javascript function handlders</strong></p>
+<p>Remove javascript function calls:</p>
+<pre class=" language-html"><code class="prism  language-html">href="javascript:void(0)"
+</code></pre>
+<p>Should be replaced by:</p>
+<pre class=" language-html"><code class="prism  language-html">href=""
+</code></pre>
+<p><strong>JSX rules replacements:</strong></p>
+<ul>
+<li>class -&gt; className</li>
+<li>for  -&gt; htmlFor</li>
+<li>tabindex  -&gt;tabIndex</li>
+<li>checked -&gt; defaultChecked={true}</li>
+<li>style -&gt;style={styleJsObject}</li>
+</ul>
+<p>Check pages at every change with usual routine:</p>
+<h3 id="try-it-out-layout-as-react-components">Try it out: Layout as React components:</h3>
+<ul>
+<li>
+<p>Step 4.1 Identify html element for navigation bar</p>
+</li>
+<li>
+<p>Step 4.2 Identify html element for menu side bar</p>
+</li>
+<li>
+<p>Step 4.3 Identify html element for content</p>
+</li>
+<li>
+<p>Step 4.4 Copy fragments into React component’s function<br>
+(NavigationBar, SideMenu, DefaultPage)</p>
+</li>
+<li>
+<p>Step 4.5 Import components into MasterPage and compose layout</p>
+</li>
+</ul>
+
+    </div>
+  </div>
+</body>
+
+</html>

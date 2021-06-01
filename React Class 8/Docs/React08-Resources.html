@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React08-Resources</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__left">
+    <div class="stackedit__toc">
+      
+<ul>
+<li><a href="#react-basic">React Basic</a>
+<ul>
+<li><a href="#react-reconciliation">React Reconciliation:</a></li>
+<li><a href="#avoid-reconciliation">Avoid reconciliation</a></li>
+<li><a href="#react-router">React Router:</a>
+<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+  </div>
+  <div class="stackedit__right">
+    <div class="stackedit__html">
+      <h1 id="react-basic">React Basic</h1>
+<h2 id="react-reconciliation">React Reconciliation:</h2>
+<p>Browser rendering process:<br>
+<a href="https://gist.github.com/faressoft/36cdd64faae21ed22948b458e6bf04d5">https://gist.github.com/faressoft/36cdd64faae21ed22948b458e6bf04d5</a></p>
+<p>Box model Reflow:<br>
+<a href="https://www.youtube.com/watch?v=dndeRnzkJDU&amp;ab_channel=Ponime">https://www.youtube.com/watch?v=dndeRnzkJDU&amp;ab_channel=Ponime</a></p>
+<p>React Reconciliation:<br>
+<a href="https://medium.com/@abdellani/how-does-the-diff-algorithm-work-in-react-js-c4296548f84b">https://medium.com/@abdellani/how-does-the-diff-algorithm-work-in-react-js-c4296548f84b</a></p>
+<h2 id="avoid-reconciliation">Avoid reconciliation</h2>
+<ol>
+<li>Override React.Component.shouldComponentUpdate<br>
+Default implementation always render</li>
+</ol>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token function">shouldComponentUpdate</span><span class="token punctuation">(</span>nextProps<span class="token punctuation">,</span> nextState<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>override implementation and use equality operator</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token function">shouldComponentUpdate</span><span class="token punctuation">(</span>nextProps<span class="token punctuation">,</span> nextState<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> 
+	  <span class="token operator">!</span>nextProps<span class="token operator">===</span><span class="token keyword">this</span><span class="token punctuation">.</span>props <span class="token operator">||</span>
+      <span class="token operator">!</span>nextState<span class="token operator">===</span><span class="token keyword">this</span><span class="token punctuation">.</span>nextState
+<span class="token punctuation">}</span>
+</code></pre>
+<ol start="2">
+<li>extend  React.Component.PureComponent</li>
+</ol>
+<p>In PureComponent</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token function">shouldComponentUpdate</span><span class="token punctuation">(</span>oldProps<span class="token punctuation">,</span> newProps<span class="token punctuation">,</span> oldState<span class="token punctuation">,</span> newState<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> 
+  <span class="token operator">!</span><span class="token function">shallowEqual</span><span class="token punctuation">(</span>oldProps<span class="token punctuation">,</span> newProps<span class="token punctuation">)</span> <span class="token operator">||</span> 
+  <span class="token operator">!</span><span class="token function">shallowEqual</span><span class="token punctuation">(</span>oldState<span class="token punctuation">,</span> newState<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>returns true if both:<br>
+No Shallow changes in state<br>
+No Shallow changes in props</p>
+<h3 id="shallow-compare">Shallow compare</h3>
+<h4 id="srcdemoshallowcomparedemo.jsx">/src/demo/ShallowCompareDemo.jsx</h4>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token function">shouldComponentUpdate</span><span class="token punctuation">(</span>oldProps<span class="token punctuation">,</span> newProps<span class="token punctuation">,</span> oldState<span class="token punctuation">,</span> newState<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">return</span> 
+  <span class="token operator">!</span><span class="token function">shallowEqual</span><span class="token punctuation">(</span>oldProps<span class="token punctuation">,</span> newProps<span class="token punctuation">)</span> <span class="token operator">||</span> 
+  <span class="token operator">!</span><span class="token function">shallowEqual</span><span class="token punctuation">(</span>oldState<span class="token punctuation">,</span> newState<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="react-router">React Router:</h2>
+<p>import react router</p>
+<pre class=" language-bash"><code class="prism  language-bash"><span class="token operator">&gt;</span> <span class="token function">npm</span> <span class="token function">install</span> --save react-router-dom
+</code></pre>
+<h4 id="srcapp.js">/src/App.js</h4>
+<p>Wrap <em>MasterPage</em> node with <em>BrowserRouter</em></p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token operator">&lt;</span>BrowserRouter<span class="token operator">&gt;</span>
+	<span class="token operator">&lt;</span>MasterPage  <span class="token operator">/</span><span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>BrowserRouter<span class="token operator">&gt;</span>
+</code></pre>
+<h4 id="srcsidebar.js">/src/Sidebar.js</h4>
+<p>Replace</p>
+<pre class=" language-html"><code class="prism  language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>a</span> <span class="token attr-name">href</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>  
+</code></pre>
+<p>with</p>
+<pre><code>&lt;Link to=""&gt;  
+</code></pre>
+<p>Final version for each link</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"> <span class="token operator">&lt;</span>li<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span>Link to<span class="token operator">=</span><span class="token string">"/formDetail"</span><span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>i className<span class="token operator">=</span><span class="token string">"tim-icons icon-chart-pie-36"</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span><span class="token operator">/</span>i<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>p<span class="token operator">&gt;</span>User Profile<span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>Link<span class="token operator">&gt;</span>
+<span class="token operator">&lt;</span><span class="token operator">/</span>li<span class="token operator">&gt;</span>
+</code></pre>
+<h4 id="srcmasterpage.js">/src/MasterPage.js</h4>
+<p>In place where Page node should be rendered place <em>Switch</em> tag with all <em>Route</em> defined matching relevant<br>
+<em>Link to attribute</em> and <em>PageComponent</em></p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token operator">&lt;</span>div  className<span class="token operator">=</span><span class="token string">"content"</span><span class="token operator">&gt;</span>
+
+	<span class="token operator">&lt;</span>Switch<span class="token operator">&gt;</span>
+	<span class="token operator">&lt;</span>Route  exact  path<span class="token operator">=</span><span class="token string">"/"</span>  component<span class="token operator">=</span><span class="token punctuation">{</span>DefaultPage<span class="token punctuation">}</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+	<span class="token operator">&lt;</span>Route  path<span class="token operator">=</span><span class="token string">"/dashboard"</span>  component<span class="token operator">=</span><span class="token punctuation">{</span>DashboardPage<span class="token punctuation">}</span><span class="token operator">/</span><span class="token operator">&gt;</span>
+	<span class="token operator">...</span>
+	<span class="token operator">&lt;</span><span class="token operator">/</span>Switch<span class="token operator">&gt;</span>
+
+<span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+</code></pre>
+
+    </div>
+  </div>
+</body>
+
+</html>

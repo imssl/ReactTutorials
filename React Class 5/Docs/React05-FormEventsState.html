@@ -1,0 +1,245 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>React05-FormEventsState</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__left">
+    <div class="stackedit__toc">
+      
+<ul>
+<li><a href="#react-forms-events-state">REACT: Forms, Events, State</a>
+<ul>
+<li><a href="#goals">GOALS</a></li>
+<li><a href="#steps">STEPS</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+  </div>
+  <div class="stackedit__right">
+    <div class="stackedit__html">
+      <h1 id="react-forms-events-state">REACT: Forms, Events, State</h1>
+<h2 id="goals">GOALS</h2>
+<ul>
+<li>Manage user actions on UI</li>
+<li>Collect data from Form</li>
+<li>Change state according to events</li>
+</ul>
+<h2 id="steps">STEPS</h2>
+<ol>
+<li>STEP 1:   React component</li>
+<li>STEP 2:  initialize component with constructor</li>
+<li>STEP 3: use State in Component</li>
+<li>STEP 4: Create and connect event handlers</li>
+<li>STEP 5: onChange change state</li>
+<li>LABS</li>
+</ol>
+<h3 id="all-changes-will-be-in--srcformdemo.jsx">All changes will be in  /src/FormDemo.jsx</h3>
+<p><strong>STARTER : rendering  /src/FormDemo.jsx</strong><br>
+In browser Console…</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token operator">...</span>Warning<span class="token punctuation">:</span> You provided a <span class="token template-string"><span class="token string">`value`</span></span> prop 
+to a form field without an <span class="token template-string"><span class="token string">`onChange`</span></span> handler<span class="token punctuation">.</span>
+This will render a read<span class="token operator">-</span>only field<span class="token punctuation">.</span> 
+If the field should be mutable use <span class="token template-string"><span class="token string">`defaultValue`</span></span><span class="token punctuation">.</span> 
+Otherwise<span class="token punctuation">,</span> <span class="token keyword">set</span> either <span class="token template-string"><span class="token string">`onChange`</span></span> or <span class="token template-string"><span class="token string">`readOnly`</span></span><span class="token punctuation">.</span>
+</code></pre>
+<p><strong>STEP 1:   React component</strong><br>
+(According to official documentation <a href="https://reactjs.org/docs/state-and-lifecycle.html">https://reactjs.org/docs/state-and-lifecycle.html</a>)<br>
+You can convert a function component like Clock to a class in five steps:</p>
+<ol>
+<li>Create an ES6 class, with the same name, that extends React.Component.</li>
+<li>Add a single empty method to it called render().</li>
+<li>Move the body of the function into the render() method.</li>
+<li>Replace props with this.props in the render() body.</li>
+<li>Delete the remaining empty function declaration.</li>
+</ol>
+<p>LET’S CODE IT</p>
+<ul>
+<li>Change function declaration with extends React.Component</li>
+</ul>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token keyword">class</span> <span class="token class-name">FormDetail</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span>
+</code></pre>
+<ul>
+<li>add render() function that returns jsx fragment</li>
+</ul>
+<pre class=" language-html"><code class="prism  language-html">render() {
+        return (
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form-group<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Row</span><span class="token punctuation">&gt;</span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>RowColumn</span> <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>4<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+                        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Card</span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>User Profile<span class="token punctuation">"</span></span> <span class="token attr-name">category</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span> <span class="token attr-name">icon</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>icon-single-02<span class="token punctuation">"</span></span> <span class="token punctuation">&gt;</span></span>
+                            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Row</span><span class="token punctuation">&gt;</span></span>
+                                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>RowColumn</span> <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>4<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+                                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>RowColumn</span><span class="token punctuation">&gt;</span></span>
+                                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>RowColumn</span> <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>8<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+                                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form-control col-md-10<span class="token punctuation">"</span></span> <span class="token attr-name">disabled</span><span class="token attr-value"><span class="token punctuation">=</span>{true}</span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span>
+                                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form-control col-md-10<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>firstName<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span>
+                                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form-control col-md-10<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>lastName<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span>
+                                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form-control col-md-10<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>city<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span>
+                                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form-control col-md-10<span class="token punctuation">"</span></span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>email<span class="token punctuation">"</span></span> <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><span class="token punctuation">"</span></span> <span class="token punctuation">/&gt;</span></span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span> <span class="token punctuation">/&gt;</span></span>
+                                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>RowColumn</span><span class="token punctuation">&gt;</span></span>
+                            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Row</span><span class="token punctuation">&gt;</span></span>
+
+                            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Row</span><span class="token punctuation">&gt;</span></span>
+                                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>RowColumn</span> <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>3<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+                                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>RowColumn</span><span class="token punctuation">&gt;</span></span>
+                                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>RowColumn</span> <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>9<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+                                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>card-footer<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+                                        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button-container<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+                                            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn btn-primary btn-icon btn-round<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+                                                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>tim-icons icon-double-left<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">&gt;</span></span>
+                                            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+                                            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn btn-primary btn-icon btn-round <span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+                                                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>tim-icons icon-minimal-left<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">&gt;</span></span>
+                                            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+                                            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span> <span class="token entity" title="&nbsp;">&amp;nbsp;</span> <span class="token entity" title="&nbsp;">&amp;nbsp;</span> <span class="token entity" title="&nbsp;">&amp;nbsp;</span> <span class="token entity" title="&nbsp;">&amp;nbsp;</span> <span class="token entity" title="&nbsp;">&amp;nbsp;</span> <span class="token entity" title="&nbsp;">&amp;nbsp;</span> <span class="token entity" title="&nbsp;">&amp;nbsp;</span><span class="token entity" title="&nbsp;">&amp;nbsp;</span> <span class="token entity" title="&nbsp;">&amp;nbsp;</span><span class="token entity" title="&nbsp;">&amp;nbsp;</span> <span class="token entity" title="&nbsp;">&amp;nbsp;</span><span class="token entity" title="&nbsp;">&amp;nbsp;</span> <span class="token entity" title="&nbsp;">&amp;nbsp;</span> <span class="token entity" title="&nbsp;">&amp;nbsp;</span> <span class="token entity" title="&nbsp;">&amp;nbsp;</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+                                            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn btn-primary btn-icon btn-round <span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+                                                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>tim-icons icon-minimal-right<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">&gt;</span></span>
+                                            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+                                            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn btn-primary btn-icon btn-round<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+                                                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>tim-icons icon-double-right<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">&gt;</span></span>
+                                            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+                                        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+                                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+                                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>RowColumn</span><span class="token punctuation">&gt;</span></span>
+                            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Row</span><span class="token punctuation">&gt;</span></span>
+                            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Row</span><span class="token punctuation">&gt;</span></span>
+                                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>RowColumn</span> <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>3<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+                                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>RowColumn</span><span class="token punctuation">&gt;</span></span>
+                                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>RowColumn</span> <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>9<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+                                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>button-container<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+                                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn btn-primary btn-round<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Save<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+                                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span> <span class="token entity" title="&nbsp;">&amp;nbsp;</span> <span class="token entity" title="&nbsp;">&amp;nbsp;</span> <span class="token entity" title="&nbsp;">&amp;nbsp;</span> <span class="token entity" title="&nbsp;">&amp;nbsp;</span> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+                                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn btn-primary btn-round<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Cancel<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+                                 <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+                                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>RowColumn</span><span class="token punctuation">&gt;</span></span>
+                            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Row</span><span class="token punctuation">&gt;</span></span>
+                        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Card</span><span class="token punctuation">&gt;</span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>RowColumn</span><span class="token punctuation">&gt;</span></span>
+                    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>RowColumn</span> <span class="token attr-name">size</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>8<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+                        <span class="token entity" title="&nbsp;">&amp;nbsp;</span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>RowColumn</span><span class="token punctuation">&gt;</span></span>
+                <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>Row</span><span class="token punctuation">&gt;</span></span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+        )
+    }
+</code></pre>
+<p><strong>STEP 2:  initialize component with constructor</strong><br>
+Get props as input (same use as in function)<br>
+Setup initial state with this.state object</p>
+<pre class=" language-javascript"><code class="prism  language-javascript">  <span class="token function">constructor</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span>props<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token operator">=</span><span class="token punctuation">{</span>
+	  firstName<span class="token punctuation">:</span><span class="token string">'Stefano'</span><span class="token punctuation">,</span>
+	  lastName<span class="token punctuation">:</span><span class="token string">'Fiorenza'</span><span class="token punctuation">,</span>
+	  city<span class="token punctuation">:</span><span class="token string">'Napoli'</span><span class="token punctuation">,</span>
+	  email<span class="token punctuation">:</span><span class="token string">'stefanofiorenza@email.it'</span>
+	<span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+</code></pre>
+<p><strong>STEP 3: use State in Component</strong></p>
+<p>in render method change value field for all input fields connecting them to state</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token operator">...</span><span class="token operator">&lt;</span>input  type<span class="token operator">=</span><span class="token string">"text"</span>  className<span class="token operator">=</span><span class="token string">"form-control col-md-10"</span>  placeholder<span class="token operator">=</span><span class="token string">"firstName"</span>  value<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>firstName<span class="token punctuation">}</span>  <span class="token operator">/</span><span class="token operator">&gt;</span><span class="token operator">&lt;</span>br  <span class="token operator">/</span><span class="token operator">&gt;</span>
+</code></pre>
+<p>connect it to form</p>
+<pre class=" language-javascript"><code class="prism  language-javascript">Try followings <span class="token keyword">in</span> console<span class="token punctuation">.</span><span class="token punctuation">.</span>
+</code></pre>
+<p><strong>STEP 4: Create and connect event handlers</strong><br>
+add onChange event handler function</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token function">onChange</span><span class="token punctuation">(</span>evt<span class="token punctuation">)</span><span class="token punctuation">{</span>
+	e<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>	
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>connect function to event in input field</p>
+<pre class=" language-html"><code class="prism  language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span>  <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form-control col-md-10<span class="token punctuation">"</span></span>  <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>firstName<span class="token punctuation">"</span></span>  <span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span>{this.state.firstName}</span>  
+<span class="token attr-name">onChange</span><span class="token attr-value"><span class="token punctuation">=</span>{this.onChange}</span>  <span class="token punctuation">/&gt;</span></span>
+</code></pre>
+<p><strong>GOAL:  We want that every  change in text input is reflected into the value (onChange)</strong></p>
+<p><strong>STEP 5: onChange change state</strong><br>
+Final code that will work</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token function">onChange</span><span class="token punctuation">(</span>evt<span class="token punctuation">)</span><span class="token punctuation">{</span>
+	e<span class="token punctuation">.</span><span class="token function">preventDefault</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">let</span> newState<span class="token operator">=</span><span class="token punctuation">{</span><span class="token operator">...</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">}</span><span class="token punctuation">;</span>
+	newState<span class="token punctuation">[</span>e<span class="token punctuation">.</span>target<span class="token punctuation">.</span>name<span class="token punctuation">]</span><span class="token operator">=</span>e<span class="token punctuation">.</span>target<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
+	<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span>newState<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>Let’s see how we got there.</p>
+<p><strong>Let’s first understand how to get the field value from the input we changed:</strong></p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token punctuation">.</span><span class="token punctuation">.</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//event object</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>target<span class="token punctuation">)</span> <span class="token comment">//html component who triggered event	</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>target<span class="token punctuation">.</span>name<span class="token punctuation">)</span><span class="token comment">//html component name if set	</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>e<span class="token punctuation">.</span>target<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token comment">//html component current value (newFirstNameValue)</span>
+	
+	<span class="token comment">//putting all together</span>
+	newState<span class="token punctuation">[</span>e<span class="token punctuation">.</span>target<span class="token punctuation">.</span>name<span class="token punctuation">]</span><span class="token operator">=</span>e<span class="token punctuation">.</span>target<span class="token punctuation">.</span>value<span class="token punctuation">;</span> <span class="token comment">//dynamically set newState.firstName=newFirstNameValue</span>
+<span class="token operator">...</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>In order for the previous to work we need to set input field name to firstName</p>
+<pre class=" language-html"><code class="prism  language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span>  <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>firstName<span class="token punctuation">"</span></span>  
+<span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text<span class="token punctuation">"</span></span>  <span class="token attr-name">className</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>form-control col-md-10<span class="token punctuation">"</span></span>  
+<span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>firstName<span class="token punctuation">"</span></span>  
+<span class="token attr-name">value</span><span class="token attr-value"><span class="token punctuation">=</span>{this.state.firstName}</span>  
+<span class="token attr-name">onChange</span><span class="token attr-value"><span class="token punctuation">=</span>{this.onChange}</span>  <span class="token punctuation">/&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span>  <span class="token punctuation">/&gt;</span></span>
+</code></pre>
+<p><strong>Why newState variable?</strong><br>
+Rule: how to change state</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token comment">// state has to be replaced by a new object.</span>
+
+<span class="token comment">//this is correct</span>
+<span class="token keyword">let</span> newState <span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+newState<span class="token punctuation">.</span>firstName<span class="token operator">=</span>newFirstName 
+<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span>newState<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">//this is not.    </span>
+<span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>firstName<span class="token operator">=</span>newFirstName <span class="token comment">//It works but is a performance killer</span>
+</code></pre>
+<p>Rule: how to change state (need to merge)</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token comment">// need to merge previous state with updated values (newFirstName ).</span>
+
+<span class="token comment">//I can copy all data from previous to new field by field</span>
+<span class="token keyword">let</span> newState <span class="token operator">=</span><span class="token punctuation">{</span><span class="token punctuation">}</span>
+newState<span class="token punctuation">.</span>firstName<span class="token operator">=</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>firstName<span class="token punctuation">;</span>
+newState<span class="token punctuation">.</span>lastName<span class="token operator">=</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>lastName<span class="token punctuation">;</span>
+newState<span class="token punctuation">.</span>city<span class="token operator">=</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>city<span class="token punctuation">;</span>
+newState<span class="token punctuation">.</span>email<span class="token operator">=</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>email<span class="token punctuation">;</span>
+
+<span class="token comment">// update only the field that was changed</span>
+newState<span class="token punctuation">.</span>firstName<span class="token operator">=</span>newFirstName 
+
+<span class="token operator">...</span>
+<span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span>newState<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>Rule: merge with spread operator (ES6)</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">let</span> newState <span class="token operator">=</span><span class="token punctuation">{</span><span class="token operator">...</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">//same as above with spread operator</span>
+</code></pre>
+<p><strong>Bind this keyword to component function</strong><br>
+In constructor we need to add this</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">this</span><span class="token punctuation">.</span>onChange<span class="token operator">=</span><span class="token keyword">this</span><span class="token punctuation">.</span>onChange<span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>That will enable usage of <em><strong>this</strong></em> in component function</p>
+<pre class=" language-javascript"><code class="prism  language-javascript"><span class="token keyword">let</span> newState <span class="token operator">=</span><span class="token punctuation">{</span><span class="token operator">...</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">//this will be otherwise undefined</span>
+</code></pre>
+<p><strong>LABS Try it yourself</strong></p>
+<ol>
+<li>Euroconverter</li>
+<li>Use Dataservice.js to load and change state using Save button</li>
+<li>Add/Remove Feature</li>
+<li>Autocomplete</li>
+</ol>
+
+    </div>
+  </div>
+</body>
+
+</html>
